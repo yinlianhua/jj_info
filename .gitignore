@@ -1,0 +1,11 @@
+/logs
+/node_modules
+/.idea
+*.swp
+*.bak
+*.tgz
+*.zip
+*.tar
+*.rar
+*.log
+*.lock
