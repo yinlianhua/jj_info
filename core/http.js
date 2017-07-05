@@ -23,7 +23,8 @@ const get = (uri, timeout) => {
                 });
             } else {
                 resolve({
-                    "res" : JSON.parse(body),
+                    //"res" : JSON.parse(body),
+                    "res" : body,
                     "err" : null
                 });
             }
@@ -57,9 +58,11 @@ const post = (uri, data, timeout) => {
 };
 
 module.exports = async (url, params, use_post, timeout) => {
+    /*
     if (!use_post) {
         url += ("/?" + querystring.stringify(params));
     }
+    */
 
     return use_post ? await post(url, params, timeout) : await get(url, timeout);
 };
