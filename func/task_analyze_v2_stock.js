@@ -10,30 +10,21 @@ let moment = require('moment');
 let mysql  = require(BASIC_PATH + "/core/mysql");
 let http   = require(BASIC_PATH + "/core/http");
 
-// 混合型-分析
-const task_rate_change_mix = async (type) => {
+// 股票型-分析
+const task_analyze_v2_stock = async (type) => {
     let self = this;
 
     // DB Conn
     let _fund_data = mysql.getConn('fund_data');
 
-    let date_list = [
-        '2016-07-01',
-        '2016-08-01',
-        '2016-09-01',
-        '2016-10-01',
-        '2016-11-01',
-        '2016-12-01',
-        '2017-01-01',
-        '2017-02-01',
-        '2017-03-01',
-        '2017-04-01',
-        '2017-05-01',
-        '2017-06-01'
-    ];
-
     //let today = moment().format("YYYY-MM-DD");
-    let today = "2017-07-27";
+    let today = "2017-07-29";
+
+    let date_list = [
+        moment(today).subtract(90, "days").format("YYYY-MM-DD"),
+        moment(today).subtract(60, "days").format("YYYY-MM-DD"),
+        moment(today).subtract(30, "days").format("YYYY-MM-DD")
+    ];
 
     let err_mark = false;
 
@@ -48,7 +39,7 @@ const task_rate_change_mix = async (type) => {
     }
 
     outloop: for (let i=0; i<date_list.length; i++) {
-        // 1.获取混合型code list
+        // 1.获取股票型code list
         var { err, res } = await _fund_data
             .select("code, name, change_type, sum(count) as count, sum(total_rate) as rate, sum(total_value) as value")
             .where({ "fund_type" : type, "change_type" : ["++", "--"] })
@@ -110,4 +101,4 @@ const task_rate_change_mix = async (type) => {
     }
 };
 
-module.exports = task_rate_change_mix;
+module.exports = task_analyze_v2_stock;

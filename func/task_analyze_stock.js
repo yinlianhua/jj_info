@@ -17,14 +17,28 @@ const task_rate_change_stock = async (type) => {
     // DB Conn
     let _fund_data = mysql.getConn('fund_data');
 
-    // 1.获取股票型code list
-    var { err, res } = await _fund_data
-        .select("code, name, change_type, sum(count) as count, sum(total_rate) as rate, sum(total_value) as value")
-        .where({ "fund_type" : type, "change_type" : ["++", "--"] })
-        .where("start_date >= '2017-01-01'")
-        .group_by("code, change_type")
-        .order_by("code asc")
-        .get("fund_rate_change");
+    let date_list = [
+        '2016-07-01',
+        '2016-08-01',
+        '2016-09-01',
+        '2016-10-01',
+        '2016-11-01',
+        '2016-12-01',
+        '2017-01-01',
+        '2017-02-01',
+        '2017-03-01',
+        '2017-04-01',
+        '2017-05-01',
+        '2017-06-01'
+    ];
+
+    //let today = moment().format("YYYY-MM-DD");
+    let today = "2017-07-27";
+
+    let err_mark = false;
+
+    // 清理数据
+    var { err } = await _fund_data.where({ "fund_type" : type}).delete("fund_analyze");
 
     if (err) {
         return {
@@ -33,42 +47,61 @@ const task_rate_change_stock = async (type) => {
         };
     }
 
-    let list = _.groupBy(res.retObject.results, "code");
+    outloop: for (let i=0; i<date_list.length; i++) {
+        // 1.获取股票型code list
+        var { err, res } = await _fund_data
+            .select("code, name, change_type, sum(count) as count, sum(total_rate) as rate, sum(total_value) as value")
+            .where({ "fund_type" : type, "change_type" : ["++", "--"] })
+            .where(`start_date >= '${date_list[i]}'`)
+            .where(`start_date < '${today}'`)
+            .group_by("code, change_type")
+            .order_by("code asc")
+            .get("fund_rate_change");
 
-    let err_mark = false;
+        if (err) {
+            err_mark = true;
 
-    let analyze_list = [];
+            break outloop;
+        }
 
-    for (let k in list) {
-        let data = {
-            "fund_type" : type,
-            "code"      : k
-        };
+        let list = _.groupBy(res.retObject.results, "code");
 
-        _.each(list[k], (elem) => {
-            if(elem.rate > 0) {
-                data.name     = elem.name;
-                data.start_date = "2017-01-01";
-                data.up_rate  = elem.rate;
-                data.up_count = elem.count;
-                data.up_value = elem.value;
-            } else{
-                data.name       = elem.name;
-                data.start_date = "2017-01-01";
-                data.down_rate  = elem.rate;
-                data.down_count = elem.count;
-                data.down_value = elem.value;
-            }
-        });
+        let analyze_list = [];
 
-        analyze_list.push(data);
-    }
+        for (let k in list) {
+            let data = {
+                "fund_type" : type,
+                "code"      : k
+            };
 
-    // 5.插入数据
-    var { err } = await _fund_data.insert("fund_analyze", analyze_list);
+            _.each(list[k], (elem) => {
+                if(elem.rate > 0) {
+                    data.name       = elem.name;
+                    data.start_date = date_list[i];
+                    data.up_rate    = elem.rate;
+                    data.up_count   = elem.count;
+                    data.up_value   = elem.value;
+                } else{
+                    data.name       = elem.name;
+                    data.start_date = date_list[i];
+                    data.down_rate  = elem.rate;
+                    data.down_count = elem.count;
+                    data.down_value = elem.value;
+                }
+            });
 
-    if (err) {
-        err_mark = true;
+            analyze_list.push(data);
+        }
+
+        // 5.插入数据
+        var { err } = await _fund_data.insert("fund_analyze", analyze_list);
+
+        if (err) {
+            err_mark = true;
+
+            break outloop;
+        }
+
     }
 
     return {

@@ -19,7 +19,8 @@ const task_forecast_stock = async (type) => {
 
     let start_date = moment().startOf("month").subtract(1, "year").format("YYYY-MM-DD");
     let end_date   = moment().startOf("month").format("YYYY-MM-DD");
-    let today      = moment().format("YYYY-MM-DD");
+    //let today      = moment().format("YYYY-MM-DD");
+    let today = "2017-07-27";
 
     // 1.获取股票型code list
     var { err, res } = await _fund_data

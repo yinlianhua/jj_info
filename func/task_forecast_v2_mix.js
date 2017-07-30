@@ -11,22 +11,19 @@ let mysql  = require(BASIC_PATH + "/core/mysql");
 let http   = require(BASIC_PATH + "/core/http");
 
 // 混合型-预测
-const task_forecast_mix = async (type) => {
+const task_forecast_v2_mix = async (type) => {
     let self = this;
 
     // DB Conn
     let _fund_data = mysql.getConn('fund_data');
 
-    let start_date = moment().startOf("month").subtract(1, "year").format("YYYY-MM-DD");
-    let end_date   = moment().startOf("month").format("YYYY-MM-DD");
     //let today      = moment().format("YYYY-MM-DD");
-    let today = "2017-07-27";
+    let today = "2017-07-29";
 
     // 1.获取股票型code list
     var { err, res } = await _fund_data
-        .select("fund_type, code, name, sum(up_rate + down_rate) as rate, sum(up_count - down_count) as count, sum(up_value + down_value) as value, start_date")
+        .select("fund_type, code, name, up_rate, down_rate, sum(up_count - down_count) as count, sum(up_value + down_value) as value, start_date")
         .where({ "fund_type" : type })
-        .where(`start_date >= '${start_date}' and start_date < '${end_date}'`)
         .group_by("code, start_date")
         .order_by("code, start_date asc")
         .get("fund_analyze");
@@ -46,19 +43,27 @@ const task_forecast_mix = async (type) => {
 
     // 2.循环计算
     for (let k in list) {
-        // 加权计算平均值
-        let last_rate = list[k][list[k]['length'] - 1]['rate'] || 0.0000;
 
-        let avg_list = _.sortBy(_.pluck(list[k], "rate"));
-            avg_list = avg_list.slice(1, avg_list.length - 2);
+        let profit_1 = 0;
+        let profit_2 = 0;
+        let profit_3 = 0;
 
-        let avg_rate = _.reduce(avg_list, (memo, num) => { return memo + num; }, 0);
-            avg_rate = avg_list.length > 0 ? (avg_rate/avg_list.length).toFixed(4) : 0.0000;
+        if (list[k].length == 3) {
+            profit_1 = (list[k][0]['up_rate'] + (list[k][0]['down_rate'] * 2)) * 0.1;
+            profit_2 = (list[k][1]['up_rate'] + (list[k][1]['down_rate'] * 2)) * 0.3;
+            profit_3 = (list[k][2]['up_rate'] + (list[k][2]['down_rate'] * 2) )* 0.6;
+        }
 
-        let charge_rate = Math.abs(+avg_rate - +last_rate).toFixed(4);
+        if (list[k].length == 2) {
+            profit_1 = (list[k][0]['up_rate'] + (list[k][0]['down_rate'] * 2)) * 0.4;
+            profit_2 = (list[k][1]['up_rate'] + (list[k][1]['down_rate'] * 2)) * 0.6;
+        }
 
-        let profit_low = (+avg_rate - 2 * +charge_rate).toFixed(4);
-        let profit_up  = (+avg_rate + +charge_rate).toFixed(4);
+        if (list[k].length == 1) {
+            profit_1 = list[k][0]['up_rate'] + (list[k][0]['down_rate'] * 2);
+        }
+
+        let avg_rate = profit_1 + profit_2 + profit_3;
 
         let expect = "";
 
@@ -107,9 +112,9 @@ const task_forecast_mix = async (type) => {
             "code"      : k,
             "name"      : list[k][0]['name'],
             "profit"    : avg_rate,
-            "float"     : charge_rate,
-            "total_low" : profit_low,
-            "total_up"  : profit_up,
+            "float"     : 0.00,
+            "total_low" : 0.00,
+            "total_up"  : 0.00,
             "expect"    : expect,
             "date"      : today
         });
@@ -135,4 +140,4 @@ const task_forecast_mix = async (type) => {
     }
 };
 
-module.exports = task_forecast_mix;
+module.exports = task_forecast_v2_mix;
