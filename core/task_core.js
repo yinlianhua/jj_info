@@ -7,6 +7,30 @@
 
 let fs = require("fs");
 let _  = require("underscore");
+let path = require("path");
+
+function dir_loop (dir) {
+    let files = [];
+
+    // 1.判断是否目录
+    let stat = fs.statSync(dir);
+
+    if (stat.isDirectory()) {
+        // 2.查询目录
+        let list = fs.readdirSync(dir);
+
+        // 3.循环处理
+        _.each(list, (file) => {
+            files = files.concat(dir_loop(path.join(dir, file)));
+        });
+    } else {
+        // 4.添加文件
+        files.push(dir);
+    }
+
+    return files;
+}
+
 
 class TaskBase {
     constructor (input) {
@@ -23,6 +47,7 @@ const extend = (protoProps) => {
             }
         }
         
+        /*
         // 通用方法挂载
         let fn_path = `${BASIC_PATH}/func`;
         let fn_list = fs.readdirSync(fn_path);
@@ -32,6 +57,19 @@ const extend = (protoProps) => {
 
             Object.assign(TaskSuper.prototype, {
                 [fn] : require(`${fn_path}/${fn}`)
+            });
+        });
+        */
+
+        // 通用方法挂载
+        let fn_list = dir_loop(`${API_PATH}/func`);
+
+        _.each(fn_list, (fn) => {
+            let name = fn.split('/');
+                name = name[name.length-1].split('.')[0];
+
+            Object.assign(TaskSuper.prototype, {
+                [name] : require(fn)
             });
         });
 

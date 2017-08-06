@@ -10,15 +10,15 @@ let moment = require('moment');
 let mysql  = require(BASIC_PATH + "/core/mysql");
 let http   = require(BASIC_PATH + "/core/http");
 
-// 股票型-预测
-const task_forecast_v2_stock = async (type) => {
+// 混合型-预测
+const task_forecast_v2_mix = async (type) => {
     let self = this;
 
     // DB Conn
     let _fund_data = mysql.getConn('fund_data');
 
     //let today      = moment().format("YYYY-MM-DD");
-    let today = "2017-07-29";
+    let today = "2017-08-04";
 
     // 1.获取股票型code list
     var { err, res } = await _fund_data
@@ -140,4 +140,4 @@ const task_forecast_v2_stock = async (type) => {
     }
 };
 
-module.exports = task_forecast_v2_stock;
+module.exports = task_forecast_v2_mix;

@@ -11,7 +11,7 @@ let mysql  = require(BASIC_PATH + "/core/mysql");
 let http   = require(BASIC_PATH + "/core/http");
 
 // 股票型-分析
-const task_rate_change_stock = async (type) => {
+const task_analyze_stock = async (type) => {
     let self = this;
 
     // DB Conn
@@ -110,4 +110,4 @@ const task_rate_change_stock = async (type) => {
     }
 };
 
-module.exports = task_rate_change_stock;
+module.exports = task_analyze_stock;

@@ -18,7 +18,7 @@ const task_analyze_v2_mix = async (type) => {
     let _fund_data = mysql.getConn('fund_data');
 
     //let today = moment().format("YYYY-MM-DD");
-    let today = "2017-07-29";
+    let today = "2017-08-04";
 
     let date_list = [
         moment(today).subtract(90, "days").format("YYYY-MM-DD"),
