@@ -18,7 +18,7 @@ const task_forecast_v2_stock = async (type) => {
     let _fund_data = mysql.getConn('fund_data');
 
     //let today      = moment().format("YYYY-MM-DD");
-    let today = "2017-08-04";
+    let today = "2017-08-05";
 
     // 1.获取股票型code list
     var { err, res } = await _fund_data

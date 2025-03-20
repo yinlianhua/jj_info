@@ -62,7 +62,7 @@ const extend = (protoProps) => {
         */
 
         // 通用方法挂载
-        let fn_list = dir_loop(`${API_PATH}/func`);
+        let fn_list = dir_loop(`${BASIC_PATH}/func`);
 
         _.each(fn_list, (fn) => {
             let name = fn.split('/');

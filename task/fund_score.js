@@ -16,7 +16,7 @@ module.exports = task_core({
             let self = this;
 
             // 获取分析查询配置信息
-            var { err, res } = await self.fn_get_config(["fund_recent_rate_task", "fund_type"]);
+            var { err, res } = await self.fn_get_config(["fund_score_task", "fund_type"]);
 
             if (err) {
                 console.log("Error, %s task exec failed !", self.input.task);
@@ -26,7 +26,7 @@ module.exports = task_core({
 
             res = _.groupBy(res, "config_type");
 
-            let fn_list   = _.groupBy(res["fund_recent_rate_task"], "key");
+            let fn_list   = _.groupBy(res["fund_score_task"], "key");
             let fund_type = _.groupBy(res["fund_type"], "key");
 
             taskloop: for (let k in fn_list) {

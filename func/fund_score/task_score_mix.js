@@ -10,8 +10,8 @@ let moment = require('moment');
 let mysql  = require(BASIC_PATH + "/core/mysql");
 let http   = require(BASIC_PATH + "/core/http");
 
-// 股票型-分析
-const task_analyze_v2_stock = async (type) => {
+// 混合型-评分
+const task_score_mix = async (type) => {
     let self = this;
 
     // DB Conn
@@ -20,6 +20,11 @@ const task_analyze_v2_stock = async (type) => {
     //let today = moment().format("YYYY-MM-DD");
     let today = "2017-08-05";
 
+    console.log(today, type);
+
+    let err_mark = false;
+
+    /*
     let date_list = [
         moment(today).subtract(90, "days").format("YYYY-MM-DD"),
         moment(today).subtract(60, "days").format("YYYY-MM-DD"),
@@ -39,7 +44,7 @@ const task_analyze_v2_stock = async (type) => {
     }
 
     outloop: for (let i=0; i<date_list.length; i++) {
-        // 1.获取股票型code list
+        // 1.获取混合型code list
         var { err, res } = await _fund_data
             .select("code, name, change_type, sum(count) as count, sum(total_rate) as rate, sum(total_value) as value")
             .where({ "fund_type" : type, "change_type" : ["++", "--"] })
@@ -94,6 +99,7 @@ const task_analyze_v2_stock = async (type) => {
         }
 
     }
+    */
 
     return {
         "err" : err_mark,
@@ -101,4 +107,4 @@ const task_analyze_v2_stock = async (type) => {
     }
 };
 
-module.exports = task_analyze_v2_stock;
+module.exports = task_score_mix;

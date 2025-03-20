@@ -18,7 +18,7 @@ const task_recent_rate_mix = async (type) => {
     let _fund_data = mysql.getConn('fund_data');
 
     //let today = moment().format("YYYY-MM-DD");
-    let today = "2017-08-04";
+    let today = "2017-08-05";
 
     let days = [7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84];
 
