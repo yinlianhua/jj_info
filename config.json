@@ -1,15 +1,6 @@
 {
-  "name": "fund_service",
-  "port": 3500,
-  "version": "1.0.0",
-  "require_params" : ["Action"],
-  "mysql" : {
-    "fund_data" : {
-      "host" : "123.59.77.32",
-      "port" : "3306",
-      "user" : "fund_master",
-      "password" : "fund_master_8asjUh6G6Dra9!",
-      "database" : "fund_data"
+    "db_path" : "/Users/yinlianhua/WorkSpace/GitProjects/prj_free/fund_service/db/fund.db3",
+    "url" : {
+        "fund_list" : "http://fund.eastmoney.com/js/fundcode_search.js"
     }
-  }
 }

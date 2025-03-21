@@ -1,29 +1,25 @@
 {
-  "name": "fund_service",
+  "name": "jj",
   "version": "1.0.0",
-  "description": "基金数据统计服务，v7.7.4+版本，ES7语法开发",
+  "description": "My qh",
   "main": "task.js",
   "scripts": {
-    "start": "node task.js"
+    "test": "node task.js"
   },
+  "repository": {},
+  "keywords": [
+    "JJ"
+  ],
   "author": "yinlianhua@ucloud.cn",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
+  "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "cookie-parser": "^1.4.3",
-    "express": "4.14.0",
-    "iconv-lite": "^0.4.18",
-    "moment": "2.17.1",
-    "mongodb": "1.4.38",
+    "axios": "0.28.1",
+    "chalk": "4.1.2",
+    "moment": "2.30.1",
     "mysql": "2.12.0",
-    "pg": "6.1.5",
-    "redis": "2.5.3",
-    "request": "2.79.0",
-    "underscore": "1.8.3",
-    "uuid": "3.0.1",
-    "yargs": "^8.0.1"
+    "request": "^2.83.0",
+    "sqlite3" : "5.1.7",
+    "underscore": "1.13.7",
+    "uuid": "10.0.0"
   }
-}
+}      
