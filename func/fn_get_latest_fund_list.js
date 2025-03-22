@@ -54,8 +54,8 @@ const fn_get_latest_fund_list = async () => {
             info.type.push("其它");
         }
 
-        info.main_type = info.type[0];
-        info.sub_type  = info.type[1];
+        info.main_type = info.type[0] || "其它";
+        info.sub_type  = info.type[1] || "其它";
 
         fund_list.push(info);
     }

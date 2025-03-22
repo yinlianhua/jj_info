@@ -1,6 +1,7 @@
 {
     "db_path" : "/Users/yinlianhua/WorkSpace/GitProjects/prj_free/fund_service/db/fund.db3",
     "url" : {
-        "fund_list" : "http://fund.eastmoney.com/js/fundcode_search.js"
+        "fund_list" : "http://fund.eastmoney.com/js/fundcode_search.js",
+        "fund_net"  : "https://stock.finance.sina.com.cn/fundInfo/api/openapi.php/CaihuiFundInfoService.getNav?"
     }
 }
