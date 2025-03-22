@@ -14,7 +14,7 @@ let db     = require('../core/sqlite3');
 const fn_get_focus_fund_list = async () => {
     await db.connect(config.db_path);
 
-    let fund_list = await db.get("SELECT * FROM t_fund_list WHERE focus = 1;");
+    let fund_list = await db.get("SELECT * FROM t_fund_list WHERE state = 1 AND focus = 1;");
 
     await db.close();
 

@@ -32,6 +32,8 @@ let sleep  = require('./core/sleep');
     let end_date   = "2025-03-21";
 
     for (let elem of focus_fund_list.res) {
+        console.log(JSON.stringify(elem));
+
         let net_data = await fn_get_fund_net_values(elem.code, elem.name, start_date, end_date);
 
         if (net_data.err) {
