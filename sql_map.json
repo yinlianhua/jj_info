@@ -1,0 +1,208 @@
+{
+    sql_all_fund_list: 'SELECT * FROM t_fund_list;',
+    sql_focus_fund_list: 'SELECT * FROM t_fund_list WHERE state = 1 AND focus = 1;',
+    sql_latest_fund_jjjz_list: '\n' +
+      '        SELECT MAX(date) AS date, code, name, jjjz, ljjz\n' +
+      '        FROM t_fund_net_worth_list\n' +
+      "        WHERE code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n" +
+      '        GROUP BY code;\n' +
+      '    ',
+    sql_010_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-03-09" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_020_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-02-23" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_030_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-02-09" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_060_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-12-29" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_090_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-11-17" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_120_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-10-06" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_150_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-08-25" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_180_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-07-14" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_210_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-06-02" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_240_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-04-21" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_270_avg_fund_jjjz_list: '\n' +
+      '            SELECT code, name, avg(jjjz) AS jjjz, avg(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-03-10" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_010_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-03-09" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_020_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-02-23" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_030_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-02-09" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_060_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-12-29" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_090_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-11-17" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_120_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-10-06" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_150_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-08-25" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_180_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-07-14" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_210_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-06-02" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_240_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-04-21" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_270_min_fund_jjjz_list: '\n' +
+      '            SELECT code, name, min(jjjz) AS jjjz, min(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-03-10" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_010_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-03-09" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_020_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-02-23" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_030_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2025-02-09" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_060_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-12-29" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_090_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-11-17" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_120_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-10-06" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_150_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-08-25" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_180_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-07-14" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_210_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-06-02" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_240_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-04-21" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        ',
+    sql_270_max_fund_jjjz_list: '\n' +
+      '            SELECT code, name, max(jjjz) AS jjjz, max(ljjz) AS ljjz\n' +
+      '            FROM t_fund_net_worth_list\n' +
+      `            WHERE date >= "2024-03-10" AND code IN ('002982','004857','005224','007882','008682','010770','011103','011513','012414','013054','013275','016186')\n` +
+      '            GROUP BY code;\n' +
+      '        '
+  }
