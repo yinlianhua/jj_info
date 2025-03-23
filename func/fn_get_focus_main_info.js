@@ -229,29 +229,29 @@ const fn_get_focus_main_info = async (date) => {
         let cma_240 = ma_240 > latest ? "red" : (ma_240 < latest ? "green" : "white");
         let cma_270 = ma_270 > latest ? "red" : (ma_270 < latest ? "green" : "white");
 
-        let cmin_10 = min_10 > latest ? "red" : (min_10 < latest ? "green" : "white");
-        let cmin_20 = min_20 > latest ? "red" : (min_20 < latest ? "green" : "white");
-        let cmin_30 = min_30 > latest ? "red" : (min_30 < latest ? "green" : "white");
-        let cmin_60 = min_60 > latest ? "red" : (min_60 < latest ? "green" : "white");
-        let cmin_90 = min_90 > latest ? "red" : (min_90 < latest ? "green" : "white");
-        let cmin120 = min120 > latest ? "red" : (min120 < latest ? "green" : "white");
-        let cmin150 = min150 > latest ? "red" : (min150 < latest ? "green" : "white");
-        let cmin180 = min180 > latest ? "red" : (min180 < latest ? "green" : "white");
-        let cmin210 = min210 > latest ? "red" : (min210 < latest ? "green" : "white");
-        let cmin240 = min240 > latest ? "red" : (min240 < latest ? "green" : "white");
-        let cmin270 = min270 > latest ? "red" : (min270 < latest ? "green" : "white");
+        let cmin_10 = min_10 >= latest ? "red" : "green";
+        let cmin_20 = min_20 >= latest ? "red" : "green";
+        let cmin_30 = min_30 >= latest ? "red" : "green";
+        let cmin_60 = min_60 >= latest ? "red" : "green";
+        let cmin_90 = min_90 >= latest ? "red" : "green";
+        let cmin120 = min120 >= latest ? "red" : "green";
+        let cmin150 = min150 >= latest ? "red" : "green";
+        let cmin180 = min180 >= latest ? "red" : "green";
+        let cmin210 = min210 >= latest ? "red" : "green";
+        let cmin240 = min240 >= latest ? "red" : "green";
+        let cmin270 = min270 >= latest ? "red" : "green";
 
-        let cmax_10 = max_10 > latest ? "red" : (max_10 < latest ? "green" : "white");
-        let cmax_20 = max_20 > latest ? "red" : (max_20 < latest ? "green" : "white");
-        let cmax_30 = max_30 > latest ? "red" : (max_30 < latest ? "green" : "white");
-        let cmax_60 = max_60 > latest ? "red" : (max_60 < latest ? "green" : "white");
-        let cmax_90 = max_90 > latest ? "red" : (max_90 < latest ? "green" : "white");
-        let cmax120 = max120 > latest ? "red" : (max120 < latest ? "green" : "white");
-        let cmax150 = max150 > latest ? "red" : (max150 < latest ? "green" : "white");
-        let cmax180 = max180 > latest ? "red" : (max180 < latest ? "green" : "white");
-        let cmax210 = max210 > latest ? "red" : (max210 < latest ? "green" : "white");
-        let cmax240 = max240 > latest ? "red" : (max240 < latest ? "green" : "white");
-        let cmax270 = max270 > latest ? "red" : (max270 < latest ? "green" : "white");
+        let cmax_10 = max_10 <= latest ? "red" : "green";
+        let cmax_20 = max_20 <= latest ? "red" : "green";
+        let cmax_30 = max_30 <= latest ? "red" : "green";
+        let cmax_60 = max_60 <= latest ? "red" : "green";
+        let cmax_90 = max_90 <= latest ? "red" : "green";
+        let cmax120 = max120 <= latest ? "red" : "green";
+        let cmax150 = max150 <= latest ? "red" : "green";
+        let cmax180 = max180 <= latest ? "red" : "green";
+        let cmax210 = max210 <= latest ? "red" : "green";
+        let cmax240 = max240 <= latest ? "red" : "green";
+        let cmax270 = max270 <= latest ? "red" : "green";
 
         let info = {
             "Latest"  : latest.toFixed(4),
