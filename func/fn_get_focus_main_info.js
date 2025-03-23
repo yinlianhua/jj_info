@@ -45,7 +45,9 @@ const fn_get_focus_main_info = async (date) => {
     // 1.当前最新值
     // 2.30/60/90/120/150/180日均值,
     // 3.30/60/90/120/150/180日最大/最小值,
-    // 4.回撤比
+    // TODO:
+    // 4.回撤比 = (MAX-CUR) / (MAX-MIN) * 100%
+    // 5.反弹比 = (CUR-MIN) / (MAX-MIN) * 100%
 
     let [
         data_latest_jjjz,
@@ -157,29 +159,7 @@ const fn_get_focus_main_info = async (date) => {
     data_240_max_jjjz = _.indexBy(data_240_max_jjjz.res, "code"); 
     data_270_max_jjjz = _.indexBy(data_270_max_jjjz.res, "code"); 
 
-    let logs_avg = [];
-    let logs_min = [];
-    let logs_max = [];
-
-    logs_avg.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-    logs_avg.push(`|  Code  | Latest |  MA10  |  MA20  |  MA30  |  MA60  |  MA90  |  MA120 |  MA150 |  MA180 |  MA210 |  MA240 |  MA270 |              Name             |`);
-    logs_avg.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-    logs_min.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-    logs_min.push(`|  Code  | Latest |  MIN10 |  MIN20 |  MIN30 |  MIN60 |  MIN90 | MIN120 | MIN150 | MIN180 | MIN210 | MIN240 | MIN270 |              Name             |`);
-    logs_min.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-    logs_max.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-    logs_max.push(`|  Code  | Latest |  MAX10 |  MAX20 |  MAX30 |  MAX60 |  MAX90 | MAX120 | MAX150 | MAX180 | MAX210 | MAX240 | MAX270 |              Name             |`);
-    logs_max.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-
-    /*
-        let qh_log = `| ${info["子名称"]} - 开盘价:${info["开盘价"]} 最新价:${info["最新价"]} [${info["最低价"]} ~${info["最高价"]} ] ${info["多空态"]}头 ${info["强度比"]} 波动:${info["波动量"]} 回撤:${info["回撤比"]}% |`;
-
-        logs.push(qh_log);
-    }
-
-    logs.push("+---------------------------------------------------------------------------------+---------------------|");
-    logs.push("");
-    */
+    let logs = [];
 
     for (let elem of fund_list.res) {
         let latest  = data_latest_jjjz[elem.code].jjjz;
@@ -217,43 +197,48 @@ const fn_get_focus_main_info = async (date) => {
         let max240  = data_240_max_jjjz[elem.code].jjjz;
         let max270  = data_270_max_jjjz[elem.code].jjjz;
 
-        let cma__10 = ma__10 > latest ? "red" : (ma__10 < latest ? "green" : "white");
-        let cma__20 = ma__20 > latest ? "red" : (ma__20 < latest ? "green" : "white");
-        let cma__30 = ma__30 > latest ? "red" : (ma__30 < latest ? "green" : "white");
-        let cma__60 = ma__60 > latest ? "red" : (ma__60 < latest ? "green" : "white");
-        let cma__90 = ma__90 > latest ? "red" : (ma__90 < latest ? "green" : "white");
-        let cma_120 = ma_120 > latest ? "red" : (ma_120 < latest ? "green" : "white");
-        let cma_150 = ma_150 > latest ? "red" : (ma_150 < latest ? "green" : "white");
-        let cma_180 = ma_180 > latest ? "red" : (ma_180 < latest ? "green" : "white");
-        let cma_210 = ma_210 > latest ? "red" : (ma_210 < latest ? "green" : "white");
-        let cma_240 = ma_240 > latest ? "red" : (ma_240 < latest ? "green" : "white");
-        let cma_270 = ma_270 > latest ? "red" : (ma_270 < latest ? "green" : "white");
+        // 当前值 大于等于 ma 值, 红色,否则绿色
+        let cma__10 = latest >= ma__10 ? "red" : "green";
+        let cma__20 = latest >= ma__20 ? "red" : "green";
+        let cma__30 = latest >= ma__30 ? "red" : "green";
+        let cma__60 = latest >= ma__60 ? "red" : "green";
+        let cma__90 = latest >= ma__90 ? "red" : "green";
+        let cma_120 = latest >= ma_120 ? "red" : "green";
+        let cma_150 = latest >= ma_150 ? "red" : "green";
+        let cma_180 = latest >= ma_180 ? "red" : "green";
+        let cma_210 = latest >= ma_210 ? "red" : "green";
+        let cma_240 = latest >= ma_240 ? "red" : "green";
+        let cma_270 = latest >= ma_270 ? "red" : "green";
 
-        let cmin_10 = min_10 >= latest ? "red" : "green";
-        let cmin_20 = min_20 >= latest ? "red" : "green";
-        let cmin_30 = min_30 >= latest ? "red" : "green";
-        let cmin_60 = min_60 >= latest ? "red" : "green";
-        let cmin_90 = min_90 >= latest ? "red" : "green";
-        let cmin120 = min120 >= latest ? "red" : "green";
-        let cmin150 = min150 >= latest ? "red" : "green";
-        let cmin180 = min180 >= latest ? "red" : "green";
-        let cmin210 = min210 >= latest ? "red" : "green";
-        let cmin240 = min240 >= latest ? "red" : "green";
-        let cmin270 = min270 >= latest ? "red" : "green";
+        // 当前值 小于等于 min 值, 红色,否则绿色
+        let cmin_10 = latest <= min_10 ? "red" : "green";
+        let cmin_20 = latest <= min_20 ? "red" : "green";
+        let cmin_30 = latest <= min_30 ? "red" : "green";
+        let cmin_60 = latest <= min_60 ? "red" : "green";
+        let cmin_90 = latest <= min_90 ? "red" : "green";
+        let cmin120 = latest <= min120 ? "red" : "green";
+        let cmin150 = latest <= min150 ? "red" : "green";
+        let cmin180 = latest <= min180 ? "red" : "green";
+        let cmin210 = latest <= min210 ? "red" : "green";
+        let cmin240 = latest <= min240 ? "red" : "green";
+        let cmin270 = latest <= min270 ? "red" : "green";
 
-        let cmax_10 = max_10 <= latest ? "red" : "green";
-        let cmax_20 = max_20 <= latest ? "red" : "green";
-        let cmax_30 = max_30 <= latest ? "red" : "green";
-        let cmax_60 = max_60 <= latest ? "red" : "green";
-        let cmax_90 = max_90 <= latest ? "red" : "green";
-        let cmax120 = max120 <= latest ? "red" : "green";
-        let cmax150 = max150 <= latest ? "red" : "green";
-        let cmax180 = max180 <= latest ? "red" : "green";
-        let cmax210 = max210 <= latest ? "red" : "green";
-        let cmax240 = max240 <= latest ? "red" : "green";
-        let cmax270 = max270 <= latest ? "red" : "green";
+        // 当前值 大于等于 max 值, 红色,否则绿色
+        let cmax_10 = latest >= max_10 ? "red" : "green";
+        let cmax_20 = latest >= max_20 ? "red" : "green";
+        let cmax_30 = latest >= max_30 ? "red" : "green";
+        let cmax_60 = latest >= max_60 ? "red" : "green";
+        let cmax_90 = latest >= max_90 ? "red" : "green";
+        let cmax120 = latest >= max120 ? "red" : "green";
+        let cmax150 = latest >= max150 ? "red" : "green";
+        let cmax180 = latest >= max180 ? "red" : "green";
+        let cmax210 = latest >= max210 ? "red" : "green";
+        let cmax240 = latest >= max240 ? "red" : "green";
+        let cmax270 = latest >= max270 ? "red" : "green";
 
         let info = {
+            "Code"    : elem.code,
+            "Name"    : elem.name,
             "Latest"  : latest.toFixed(4),
             "MA__10"  : ma__10.toFixed(4),
             "MA__20"  : ma__20.toFixed(4),
@@ -323,22 +308,39 @@ const fn_get_focus_main_info = async (date) => {
             "CMAX270" : cmax270,
         }
 
-        let log_ma  = `| ${elem.code} | ${info.Latest} | ${chalk[info.CMA__10](info.MA__10)} | ${chalk[info.CMA__20](info.MA__20)} | ${chalk[info.CMA__30](info.MA__30)} | ${chalk[info.CMA__60](info.MA__60)} | ${chalk[info.CMA__90](info.MA__90)} | ${chalk[info.CMA_120](info.MA_120)} | ${chalk[info.CMA_150](info.MA_150)} | ${chalk[info.CMA_180](info.MA_180)} | ${chalk[info.CMA_210](info.MA_210)} | ${chalk[info.CMA_240](info.MA_240)} | ${chalk[info.CMA_270](info.MA_270)} | ${elem.name}`;
-        let log_min = `| ${elem.code} | ${info.Latest} | ${chalk[info.CMIN_10](info.MIN_10)} | ${chalk[info.CMIN_20](info.MIN_20)} | ${chalk[info.CMIN_30](info.MIN_30)} | ${chalk[info.CMIN_60](info.MIN_60)} | ${chalk[info.CMIN_90](info.MIN_90)} | ${chalk[info.CMIN120](info.MIN120)} | ${chalk[info.CMIN150](info.MIN150)} | ${chalk[info.CMIN180](info.MIN180)} | ${chalk[info.CMIN210](info.MIN210)} | ${chalk[info.CMIN240](info.MIN240)} | ${chalk[info.CMIN270](info.MIN270)} | ${elem.name}`;
-        let log_max = `| ${elem.code} | ${info.Latest} | ${chalk[info.CMAX_10](info.MAX_10)} | ${chalk[info.CMAX_20](info.MAX_20)} | ${chalk[info.CMAX_30](info.MAX_30)} | ${chalk[info.CMAX_60](info.MAX_60)} | ${chalk[info.CMAX_90](info.MAX_90)} | ${chalk[info.CMAX120](info.MAX120)} | ${chalk[info.CMAX150](info.MAX150)} | ${chalk[info.CMAX180](info.MAX180)} | ${chalk[info.CMAX210](info.MAX210)} | ${chalk[info.CMAX240](info.MAX240)} | ${chalk[info.CMAX270](info.MAX270)} | ${elem.name}`;
-
-        logs_avg.push(log_ma);
-        logs_min.push(log_min);
-        logs_max.push(log_max);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push("|  Code  | Latest |                 Name              |");
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`| ${chalk["yellow"](info.Code)} | ${chalk["yellow"](info.Latest)} | ${chalk["yellow"](info.Name)}`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push("|        |   Day  |   MA   |   MIN  |   MAX  |  Rate  |");
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   01   |    10  | ${chalk[info.CMA__10](info.MA__10)} | ${chalk[info.CMIN_10](info.MIN_10)} | ${chalk[info.CMAX_10](info.MAX_10)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   02   |    20  | ${chalk[info.CMA__20](info.MA__20)} | ${chalk[info.CMIN_20](info.MIN_20)} | ${chalk[info.CMAX_20](info.MAX_20)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   03   |    30  | ${chalk[info.CMA__30](info.MA__30)} | ${chalk[info.CMIN_30](info.MIN_30)} | ${chalk[info.CMAX_30](info.MAX_30)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   04   |    60  | ${chalk[info.CMA__60](info.MA__60)} | ${chalk[info.CMIN_60](info.MIN_60)} | ${chalk[info.CMAX_60](info.MAX_60)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   05   |    90  | ${chalk[info.CMA__90](info.MA__90)} | ${chalk[info.CMIN_90](info.MIN_90)} | ${chalk[info.CMAX_90](info.MAX_90)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   06   |   120  | ${chalk[info.CMA_120](info.MA_120)} | ${chalk[info.CMIN120](info.MIN120)} | ${chalk[info.CMAX120](info.MAX120)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   07   |   150  | ${chalk[info.CMA_150](info.MA_150)} | ${chalk[info.CMIN150](info.MIN150)} | ${chalk[info.CMAX150](info.MAX150)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   08   |   180  | ${chalk[info.CMA_180](info.MA_180)} | ${chalk[info.CMIN180](info.MIN180)} | ${chalk[info.CMAX180](info.MAX180)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   09   |   210  | ${chalk[info.CMA_210](info.MA_210)} | ${chalk[info.CMIN210](info.MIN210)} | ${chalk[info.CMAX210](info.MAX210)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   10   |   240  | ${chalk[info.CMA_240](info.MA_240)} | ${chalk[info.CMIN240](info.MIN240)} | ${chalk[info.CMAX240](info.MAX240)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push(`|   11   |   270  | ${chalk[info.CMA_270](info.MA_270)} | ${chalk[info.CMIN270](info.MIN270)} | ${chalk[info.CMAX270](info.MAX270)} |   --   |`);
+        logs.push("+--------+--------+-----------------------------------+");
+        logs.push("");
     }
 
-    logs_avg.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-    logs_min.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-    logs_max.push("+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-------------------------------+");
-
-    for (let log of logs_avg) { console.log(log) }
-    for (let log of logs_min) { console.log(log) }
-    for (let log of logs_max) { console.log(log) }
+    for (let log of logs) { console.log(log) }
 
     return {
         "err" : false,
