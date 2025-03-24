@@ -26,10 +26,17 @@ let sleep  = require('./core/sleep');
         process.exit(-1);
     }
 
-    // let start_date = moment().subtract(1, "day").format("YYYY-MM-DD");
-    // let end_date   = moment().format("YYYY-MM-DD");
-    let start_date = "2021-01-01";
-    let end_date   = "2025-03-23";
+    let start_date = moment().subtract(1, "day").format("YYYY-MM-DD");
+    let end_date   = moment().format("YYYY-MM-DD");
+
+    // 手动指定日期
+    // let start_date = "2021-01-01";
+    // let end_date   = "2025-03-23";
+
+    // 手动指定基金
+    // focus_fund_list.res = [
+    //     { "code" : "001549", "name" : "天弘上证50ETF联接C" },
+    // ]
 
     for (let elem of focus_fund_list.res) {
         console.log(JSON.stringify(elem));
