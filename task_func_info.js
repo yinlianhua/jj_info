@@ -11,9 +11,13 @@ let sleep  = require('./core/sleep');
 
 (async () => {
     // 获取基金主要信息
-    let fn_get_focus_main_info = require("./func/fn_get_focus_main_info");
+    let fn_log_fund_main = require("./func/fn_log_fund_main");
 
-    await fn_get_focus_main_info();
+    let logs = await fn_log_fund_main();
+
+    for (let log of logs.res) {
+        console.log(log)
+    }
 
 	process.exit(0)
 })()
