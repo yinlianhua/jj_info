@@ -272,11 +272,66 @@ const fn_get_focus_main_info = async (date) => {
         let max330  = data_330_max_jjjz[elem.code].jjjz;
         let max360  = data_360_max_jjjz[elem.code].jjjz;
 
+        let r_005 = (latest - min005) / (max005 - min005);
+        let r_010 = (latest - min010) / (max010 - min010);
+        let r_015 = (latest - min015) / (max015 - min015);
+        let r_020 = (latest - min020) / (max020 - min020);
+        let r_025 = (latest - min025) / (max025 - min025);
+        let r_030 = (latest - min030) / (max030 - min030);
+        let r_060 = (latest - min060) / (max060 - min060);
+        let r_090 = (latest - min090) / (max090 - min090);
+        let r_120 = (latest - min120) / (max120 - min120);
+        let r_150 = (latest - min150) / (max150 - min150);
+        let r_180 = (latest - min180) / (max180 - min180);
+        let r_210 = (latest - min210) / (max210 - min210);
+        let r_240 = (latest - min240) / (max240 - min240);
+        let r_270 = (latest - min270) / (max270 - min270);
+
+        // score 计算规则
+        // 最新值在
+        // 短期(5-30)
+        // 高于 +分, 系数 = 1-rate
+        // 低于 -分  系数 = rate
+        // 长期(60-270)
+        // 低于 +分  系数 = 1-rate
+        // 高于 -分, 系数 = rate
+        let score = 0.00;
+
+        if (latest > avg005) { score += avg005 * (1 - r_005); }
+        if (latest < avg005) { score -= avg005 *      r_005;  };
+        if (latest > avg010) { score += avg010 * (1 - r_010); }
+        if (latest < avg010) { score -= avg010 *      r_010;  };
+        if (latest > avg015) { score += avg015 * (1 - r_015); }
+        if (latest < avg015) { score -= avg015 *      r_015;  };
+        if (latest > avg020) { score += avg020 * (1 - r_020); }
+        if (latest < avg020) { score -= avg020 *      r_020;  };
+        if (latest > avg025) { score += avg025 * (1 - r_025); }
+        if (latest < avg025) { score -= avg025 *      r_025;  };
+        if (latest > avg030) { score += avg030 * (1 - r_030); }
+        if (latest < avg030) { score -= avg030 *      r_030;  };
+
+        if (latest < avg060) { score += avg060 * (1 - r_060); }
+        if (latest > avg060) { score -= avg060 *      r_060;  };
+        if (latest < avg090) { score += avg090 * (1 - r_090); }
+        if (latest > avg090) { score -= avg090 *      r_090;  };
+        if (latest < avg120) { score += avg120 * (1 - r_120); }
+        if (latest > avg120) { score -= avg120 *      r_120;  };
+        if (latest < avg150) { score += avg150 * (1 - r_150); }
+        if (latest > avg150) { score -= avg150 *      r_150;  };
+        if (latest < avg180) { score += avg180 * (1 - r_180); }
+        if (latest > avg180) { score -= avg180 *      r_180;  };
+        if (latest < avg210) { score += avg210 * (1 - r_210); }
+        if (latest > avg210) { score -= avg210 *      r_210;  };
+        if (latest < avg240) { score += avg240 * (1 - r_240); }
+        if (latest > avg240) { score -= avg240 *      r_240;  };
+        if (latest < avg270) { score += avg270 * (1 - r_270); }
+        if (latest > avg270) { score -= avg270 *      r_270;  };
+
         let info = {
             "code"   : elem.code,
             "name"   : elem.name,
             "latest" : latest.toFixed(4),
-            "score"  : 0,
+            "score"  : score.toFixed(2),
             "avg005" : avg005.toFixed(4),
             "avg010" : avg010.toFixed(4),
             "avg015" : avg015.toFixed(4),

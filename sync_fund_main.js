@@ -30,5 +30,7 @@ let sleep  = require('./core/sleep');
         process.exit(-1);
     }
 
+    console.log("基金信息更新成功");
+
 	process.exit(0)
 })()

@@ -56,5 +56,7 @@ let sleep  = require('./core/sleep');
         }
     }
 
+    console.log("基金净值更新成功");
+
 	process.exit(0)
 })()

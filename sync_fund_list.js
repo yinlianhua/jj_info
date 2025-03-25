@@ -54,5 +54,7 @@ let sleep  = require('./core/sleep');
         }
     }
 
+    console.log("基金列表更新成功");
+
 	process.exit(0)
 })()
