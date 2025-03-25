@@ -17,6 +17,10 @@ let sleep  = require('./core/sleep');
 
     for (let log of logs.res) {
         console.log(log)
+
+        if (log == "") {
+            await sleep(5000);
+        }
     }
 
 	process.exit(0)
