@@ -1,13 +1,12 @@
 /**
- * Date : 2017-06-09
- * By   : yinlianhua@ucloud.cn
+ * Date : 2025-03-25
+ * By   : yinlianhua@sina.cn
  **/
 
 'use strict';
 
 let _      = require('underscore');
 let moment = require('moment');
-let chalk  = require("chalk");
 let config = require("../config.json");
 let db     = require('../core/sqlite3');
 
@@ -20,7 +19,6 @@ const fn_get_focus_main_info = async (date) => {
 
     if (fund_list.err) {
         await db.close();
-
         return {
             "err" : true,
             "res" : fund_list.res,
@@ -28,6 +26,7 @@ const fn_get_focus_main_info = async (date) => {
     }
 
     if (fund_list.res.length == 0) {
+        await db.close();
         return {
             "err" : false,
             "res" : [],
@@ -45,7 +44,6 @@ const fn_get_focus_main_info = async (date) => {
     // 1.当前最新值
     // 2.30/60/90/120/150/180日均值,
     // 3.30/60/90/120/150/180日最大/最小值,
-    // TODO:
     // 4.回撤比 = (MAX-CUR) / (MAX-MIN) * 100%
     // 5.反弹比 = (CUR-MIN) / (MAX-MIN) * 100%
 
@@ -387,6 +385,8 @@ const fn_get_focus_main_info = async (date) => {
 
         data.push(info);
     }
+
+    await db.close();
 
     return {
         "err" : false,

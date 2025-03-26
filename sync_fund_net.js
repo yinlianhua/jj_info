@@ -1,6 +1,6 @@
 /**
- * Date : 2025-03-22
- * By   : yinlianhua@ucloud.cn
+ * Date : 2025-03-25
+ * By   : yinlianhua@sina.cn
  **/
 
 'use strict';
@@ -39,7 +39,7 @@ let sleep  = require('./core/sleep');
     // ]
 
     for (let elem of focus_fund_list.res) {
-        console.log(JSON.stringify(elem));
+        // console.log(JSON.stringify(elem));
 
         let net_data = await fn_get_fund_net_values(elem.code, elem.name, start_date, end_date);
 

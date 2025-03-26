@@ -1,6 +1,6 @@
 /**
- * Date : 2017-06-09
- * By   : yinlianhua@ucloud.cn
+ * Date : 2025-03-25
+ * By   : yinlianhua@sina.cn
  **/
 
 'use strict';
@@ -26,6 +26,7 @@ const fn_add_new_fund_list = async (new_list=[]) => {
         if (add_res.err) {
             res.err = true;
             res.res = add_res.err;
+            break;
         }
     }
 

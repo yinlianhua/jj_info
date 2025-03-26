@@ -1,6 +1,6 @@
 /**
- * Date : 2017-06-09
- * By   : yinlianhua@ucloud.cn
+ * Date : 2025-03-25
+ * By   : yinlianhua@sina.cn
  **/
 
 'use strict';
@@ -13,15 +13,11 @@ let db     = require('../core/sqlite3');
 
 // 获取关注基金主要信息
 const fn_get_focus_main_info = async (date) => {
-    await db.connect(config.db_path);
-
     let fn_get_fund_main_list = require("./fn_get_fund_main_list");
 
     let main_list = await fn_get_fund_main_list();
 
     if (main_list.err) {
-        await db.close();
-
         return {
             "err" : true,
             "res" : main_list.res,

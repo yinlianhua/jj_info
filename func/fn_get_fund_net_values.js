@@ -1,6 +1,6 @@
 /**
- * Date : 2025-03-21
- * By   : yinlianhua@ucloud.cn
+ * Date : 2025-03-25
+ * By   : yinlianhua@sina.cn
  **/
 
 'use strict';
@@ -35,7 +35,7 @@ const fn_get_fund_net_values = async (code, name, start, end) => {
             break;
         }
 
-        console.log(start_date, "-", end_date, data.res.result.data.data.length);
+        // console.log(start_date, "-", end_date, data.res.result.data.data.length);
 
         for (let elem of (data.res.result.data.data || []).reverse()) {
             res_data.push({
@@ -50,7 +50,7 @@ const fn_get_fund_net_values = async (code, name, start, end) => {
         start_date = moment(end_date).add(1, "day").format("YYYY-MM-DD");
         end_date   = moment(start_date).add(19, "day").format("YYYY-MM-DD")
 
-        await sleep(500);
+        await sleep(300);
     } while(start_date <= end);
 
     if (res.err) {
