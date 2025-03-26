@@ -329,7 +329,7 @@ const fn_get_focus_main_info = async (date) => {
             "code"   : elem.code,
             "name"   : elem.name,
             "latest" : latest.toFixed(4),
-            "score"  : score.toFixed(2),
+            "score"  : (score/latest).toFixed(2),
             "avg005" : avg005.toFixed(4),
             "avg010" : avg010.toFixed(4),
             "avg015" : avg015.toFixed(4),
