@@ -9,7 +9,7 @@ let _      = require('underscore');
 let moment = require('moment');
 let sleep  = require('./core/sleep');
 
-(async () => {
+async function sync_fund_list() {
     // 获取最新基金列表
     let fn_get_latest_fund_list = require("./func/fn_get_latest_fund_list");
     // 获取存量基金列表
@@ -55,6 +55,6 @@ let sleep  = require('./core/sleep');
     }
 
     console.log("基金列表更新成功");
+}
 
-	process.exit(0)
-})()
+module.exports = sync_fund_list;

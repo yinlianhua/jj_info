@@ -9,7 +9,7 @@ let _      = require('underscore');
 let moment = require('moment');
 let sleep  = require('./core/sleep');
 
-(async () => {
+async function sync_fund_net() {
     // 获取待同步基金列表
     let fn_get_focus_fund_list = require("./func/fn_get_focus_fund_list");
 
@@ -57,6 +57,6 @@ let sleep  = require('./core/sleep');
     }
 
     console.log("基金净值更新成功");
+}
 
-	process.exit(0)
-})()
+module.exports = sync_fund_net;
