@@ -134,7 +134,7 @@ const fn_get_focus_main_info = async (date) => {
         logs.push("+--------+--------+-----------------------------------+");
         logs.push(`| ${chalk["yellow"](elem.code)} | ${chalk["yellow"](elem.latest)} | ${chalk["yellow"](elem.name)}`);
         logs.push("+--------+--------+-----------------------------------+");
-        logs.push("|   Day  |   AVG  |   MIN  |   MAX  |  Rate  |  Star  |");
+        logs.push("|   Day  |   AVG  |   MIN  |   MAX  |  Rate  |  Star  |"); // min-max 区间
         logs.push("+--------+--------+-----------------------------------+");
         logs.push(`|     5  | ${chalk[c_avg005](elem.avg005)} | ${chalk[c_min005](elem.min005)} | ${chalk[c_max005](elem.max005)} |  ${chalk[c_005](r_005)}  |        |`);
         logs.push("+--------+--------------------------------------------+");
