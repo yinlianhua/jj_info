@@ -12,7 +12,7 @@ let config = require("../config.json");
 let db     = require('../core/sqlite3');
 
 // 获取关注基金主要信息
-const fn_log_fund_main_v2 = async () => {
+const fn_log_fund_main_v2 = async (code="") => {
     let fn_get_fund_main_list = require("./fn_get_fund_main_list");
 
     let main_list = await fn_get_fund_main_list();
@@ -36,6 +36,10 @@ const fn_log_fund_main_v2 = async () => {
     let logs = [];
 
     for (let [key, infos] of Object.entries(main_list)) {
+        if (code != "" && code != key) {
+            continue;
+        }
+
         logs.push("+------------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------------------+");
         logs.push(`|            |  Code  |   Net  |  Score | AVG005 | AVG010 | AVG015 | AVG020 | AVG025 | AVG030 | AVG060 | AVG090 | AVG120 | AVG150 |  MIN-MAX 005  |  MIN-MAX 010  |  MIN-MAX 015  |  MIN-MAX 020  |  MIN-MAX 025  |  MIN-MAX 030  |  MIN-MAX 060  |  MIN-MAX 090  |  MIN-MAX 120  |  MIN-MAX 150  |          Name             |`);
         logs.push("+------------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------------------+");
