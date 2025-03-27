@@ -11,7 +11,7 @@ let config = require("../config.json");
 let db     = require('../core/sqlite3');
 
 // 添加基金分数信息
-const fn_add_fund_score_list = async (new_list=[]) => {
+const fn_add_fund_score_list = async (date, new_list=[]) => {
     await db.connect(config.db_path);
 
     let res = {
@@ -20,6 +20,7 @@ const fn_add_fund_score_list = async (new_list=[]) => {
     }
 
     for (let elem of new_list) {
+        /*
         // 获取最新净值日期
         let net_info = await db.get(`SELECT * FROM t_fund_net_worth_list WHERE code = "${elem.code}" ORDER BY date DESC limit 1;`);
 
@@ -30,6 +31,9 @@ const fn_add_fund_score_list = async (new_list=[]) => {
         }
 
         elem.date = net_info.res[0].date;
+        */
+
+        elem.date = date;
 
         // 判断数据是否存在
         let info = await db.get(`SELECT * FROM t_fund_score WHERE code = "${elem.code}" AND date = "${elem.date}";`);

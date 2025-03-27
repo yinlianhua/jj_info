@@ -9,7 +9,7 @@ let _      = require('underscore');
 let moment = require('moment');
 let sleep  = require('./core/sleep');
 
-async function sync_fund_main() {
+async function sync_fund_main(date) {
     // 获取基金主要信息
     let fn_get_focus_main_info = require("./func/fn_get_focus_main_info");
 
@@ -19,7 +19,7 @@ async function sync_fund_main() {
     // 添加基金分数记录
     let fn_add_fund_score_list = require("./func/fn_add_fund_score_list");
 
-    let main_list = await fn_get_focus_main_info();
+    let main_list = await fn_get_focus_main_info(date);
 
     if (main_list.err) {
         console.log(`获取基金主要信息失败, ${main_list.res}`);
@@ -33,7 +33,7 @@ async function sync_fund_main() {
         process.exit(-1);
     }
 
-    let score_res = await fn_add_fund_score_list(main_list.res);
+    let score_res = await fn_add_fund_score_list(date, main_list.res);
 
     if (score_res.err) {
         console.log(`更新基金分数信息失败, ${score_res.res}`);
