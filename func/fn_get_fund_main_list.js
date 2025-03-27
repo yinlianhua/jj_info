@@ -11,11 +11,17 @@ let config = require("../config.json");
 let db     = require('../core/sqlite3');
 
 // 获取基金主要信息列表
-const fn_get_fund_main_list = async () => {
+const fn_get_fund_main_list = async (date="") => {
     await db.connect(config.db_path);
 
+    let sql = "SELECT * FROM t_fund_main_info;";
+
+    if (date != "") {
+        sql = `SELECT * FROM t_fund_main_info WHERE date = "${date}";`;
+    }
+
     // 获取关注基金
-    let main_list = await db.get("SELECT * FROM t_fund_main_info;");
+    let main_list = await db.get(sql);
 
     await db.close();
 

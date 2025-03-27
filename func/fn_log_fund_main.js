@@ -12,10 +12,10 @@ let config = require("../config.json");
 let db     = require('../core/sqlite3');
 
 // 获取关注基金主要信息
-const fn_get_focus_main_info = async (date) => {
+const fn_log_fund_main = async (date) => {
     let fn_get_fund_main_list = require("./fn_get_fund_main_list");
 
-    let main_list = await fn_get_fund_main_list();
+    let main_list = await fn_get_fund_main_list(date);
 
     if (main_list.err) {
         return {
@@ -173,4 +173,4 @@ const fn_get_focus_main_info = async (date) => {
     };
 };
 
-module.exports = fn_get_focus_main_info;
+module.exports = fn_log_fund_main;

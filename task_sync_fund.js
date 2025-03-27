@@ -14,6 +14,7 @@ let sleep  = require('./core/sleep');
     let sync_fund_net  = require("./sync_fund_net");
     let sync_fund_main = require("./sync_fund_main");
 
+
     let date = moment().format('YYYY-MM-DD');
 
     await sync_fund_list();

@@ -10,10 +10,16 @@ let moment = require('moment');
 let sleep  = require('./core/sleep');
 
 (async () => {
-    // 获取基金主要信息
-    let fn_log_fund_main = require("./func/fn_log_fund_main");
+    let date = moment().format('YYYY-MM-DD');
 
-    let logs = await fn_log_fund_main();
+    // 获取基金主要信息
+    // let fn_log_fund_main = require("./func/fn_log_fund_main");
+
+    // let logs = await fn_log_fund_main(date);
+
+    let fn_log_fund_main_v2 = require("./func/fn_log_fund_main_v2");
+
+    let logs = await fn_log_fund_main_v2(date);
 
     for (let log of logs.res) {
         console.log(log)
