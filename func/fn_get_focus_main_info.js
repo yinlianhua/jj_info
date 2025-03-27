@@ -101,7 +101,7 @@ const fn_get_focus_main_info = async (date) => {
         data_330_max_jjjz,
         data_360_max_jjjz,
     ] = await Promise.all([
-        db.get(sql_map.sql_latest_fund_jjjz_list),
+        db.get(sql_map.sql_date_fund_jjjz_list),
         db.get(sql_map.sql_005_avg_fund_jjjz_list),
         db.get(sql_map.sql_010_avg_fund_jjjz_list),
         db.get(sql_map.sql_015_avg_fund_jjjz_list),
@@ -326,6 +326,7 @@ const fn_get_focus_main_info = async (date) => {
         if (latest > avg270) { score -= avg270 *      r_270;  };
 
         let info = {
+            "date"   : date,
             "code"   : elem.code,
             "name"   : elem.name,
             "latest" : latest.toFixed(4),

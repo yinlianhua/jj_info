@@ -16,9 +16,6 @@ async function sync_fund_main(date) {
     // 添加基金主要信息
     let fn_add_fund_main_list = require("./func/fn_add_fund_main_list");
 
-    // 添加基金分数记录
-    let fn_add_fund_score_list = require("./func/fn_add_fund_score_list");
-
     let main_list = await fn_get_focus_main_info(date);
 
     if (main_list.err) {
@@ -33,12 +30,17 @@ async function sync_fund_main(date) {
         process.exit(-1);
     }
 
-    let score_res = await fn_add_fund_score_list(date, main_list.res);
+    /*
+    // 添加基金分数记录(WARN: 废弃)
+    let fn_add_fund_score_list = require("./func/fn_add_fund_score_list");
+
+    let score_res = await fn_add_fund_score_list(main_list.res);
 
     if (score_res.err) {
         console.log(`更新基金分数信息失败, ${score_res.res}`);
         process.exit(-1);
     }
+    */
 
     console.log("基金信息更新成功");
 }

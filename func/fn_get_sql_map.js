@@ -130,6 +130,13 @@ const fn_get_sql_map = async (date="", codes=[]) => {
         WHERE code IN ('${codes.join("','")}')
         GROUP BY code;
     `;
+    // 指定日期基金净值
+    let sql_date_fund_jjjz_list = `
+        SELECT date, code, name, jjjz, ljjz
+        FROM ${table_map.t_fund_net_worth_list}
+        WHERE date = "${date}" AND code IN ('${codes.join("','")}')
+        GROUP BY code;
+    `;
 
     // AVG 基金净值
     let sql_avg_map = get_sql_statement("avg", date, date_map, table_map.t_fund_net_worth_list, codes);
@@ -144,6 +151,7 @@ const fn_get_sql_map = async (date="", codes=[]) => {
         sql_all_fund_list,
         sql_focus_fund_list,
         sql_latest_fund_jjjz_list,
+        sql_date_fund_jjjz_list,
         ...sql_avg_map,
         ...sql_min_map,
         ...sql_max_map,
