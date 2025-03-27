@@ -19,7 +19,7 @@ let sleep  = require('./core/sleep');
         console.log(log)
 
         if (log == "") {
-            await sleep(5000);
+            await sleep(1000);
         }
     }
 
