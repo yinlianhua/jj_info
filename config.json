@@ -3,11 +3,5 @@
     "url" : {
         "fund_list" : "http://fund.eastmoney.com/js/fundcode_search.js",
         "fund_net"  : "https://stock.finance.sina.com.cn/fundInfo/api/openapi.php/CaihuiFundInfoService.getNav?"
-    },
-    "llm" : {
-        "name"  : "deepseek",
-        "url"   : "https://api.deepseek.com/chat/completions",
-        "key"   : "sk-d9cdfea433b9408bbd1090044eaa49f3",
-        "model" : "deepseek-chat"
     }
 }

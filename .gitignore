@@ -1,6 +1,7 @@
 /logs
 /node_modules
 /.idea
+secret.json
 *.swp
 *.bak
 *.tgz

@@ -8,7 +8,7 @@
 let _      = require('underscore');
 let moment = require('moment');
 let http   = require("./ihttp");
-let config = require("../config.json");
+let config = require("../secret.json");
 
 const llm = async (prompts=[], json_output=true, temperature=0.85, model="deepseek-chat") => {
     let header = {
