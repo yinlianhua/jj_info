@@ -8,6 +8,7 @@
 let _      = require('underscore');
 let moment = require('moment');
 let sleep  = require('./core/sleep');
+let mail   = require("./core/mail");
 
 (async () => {
     // let date = moment().format('YYYY-MM-DD');
@@ -21,17 +22,21 @@ let sleep  = require('./core/sleep');
     let code = [];
 
     let fn_log_fund_main_v2 = require("./func/fn_log_fund_main_v2");
+    let fn_make_fund_ejs_v1 = require("./func/fn_make_fund_ejs_v1");
 
-    // let logs = await fn_log_fund_main_v2(code, date);
-    let logs = await fn_log_fund_main_v2([], date);
+    let data = await fn_log_fund_main_v2([], date);
 
-    for (let log of logs.res) {
-        console.log(log)
+    let html = await fn_make_fund_ejs_v1(data.res);
 
-        if (log == "") {
-            await sleep(1000);
-        }
+    let params = {
+        "to"      : "yinlianhua@sina.cn",
+        "subject" : "最新基金信息",
+        "html"    : html
     }
+
+    let send_res = await mail(params);
+
+    console.log(send_res)
 
 	process.exit(0)
 })()
