@@ -17,11 +17,8 @@ let sleep  = require('./core/sleep');
 
     // let logs = await fn_log_fund_main(date);
 
-    let date = "2025-03-28";
-    let code = [
-        "010770",
-        "515880"
-    ];
+    let date = "2025-03-31";
+    let code = [];
 
     let fn_log_fund_main_v2 = require("./func/fn_log_fund_main_v2");
 
