@@ -18,7 +18,7 @@ let mail   = require("./core/mail");
 
     // let logs = await fn_log_fund_main(date);
 
-    let date = "2025-03-31";
+    let date = "2025-04-01";
     let code = [];
 
     let fn_log_fund_main_v2 = require("./func/fn_log_fund_main_v2");
