@@ -145,6 +145,48 @@ const fn_make_fund_ejs_v1 = async (data=[]) => {
             <th>MA060</th>
             <th>MA090</th>
             <th>MA120</th>
+            <th>区间-030</th>
+            <th>区间-060</th>
+            <th>区间-090</th>
+            <th>区间-120</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% for (let i of data) { %>
+        <tr>
+            <td><%= i.date %></td>
+            <td style="color:<%= i.c_name %>"><%= i.name %></td>
+            <td style="color:<%= i.c_latest %>"><%= i.latest %></td>
+            <td style="color:<%= i.c_score %>"><%= i.score %></td>
+            <td style="color:<%= i.c_avg010 %>"><%= i.avg010 %></td>
+            <td style="color:<%= i.c_avg020 %>"><%= i.avg020 %></td>
+            <td style="color:<%= i.c_avg030 %>"><%= i.avg030 %></td>
+            <td style="color:<%= i.c_avg060 %>"><%= i.avg060 %></td>
+            <td style="color:<%= i.c_avg090 %>"><%= i.avg090 %></td>
+            <td style="color:<%= i.c_avg120 %>"><%= i.avg120 %></td>
+            <td style="color:<%= i.c_030 %>"><%= i.min005 %> ~ <%= i.max030 %> <%= i.s_030 %></td>
+            <td style="color:<%= i.c_060 %>"><%= i.min005 %> ~ <%= i.max060 %> <%= i.s_060 %></td>
+            <td style="color:<%= i.c_090 %>"><%= i.min005 %> ~ <%= i.max090 %> <%= i.s_090 %></td>
+            <td style="color:<%= i.c_120 %>"><%= i.min005 %> ~ <%= i.max120 %> <%= i.s_120 %></td>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
+`;
+    let ctx_back = `
+<table id="state">
+    <thead>
+        <tr>
+            <th>日期</th>
+            <th>名称</th>
+            <th>净值</th>
+            <th>得分</th>
+            <th>MA010</th>
+            <th>MA020</th>
+            <th>MA030</th>
+            <th>MA060</th>
+            <th>MA090</th>
+            <th>MA120</th>
             <th>MA150</th>
             <th>MA180</th>
             <th>MA210</th>
