@@ -164,10 +164,10 @@ const fn_make_fund_ejs_v1 = async (data=[]) => {
             <td style="color:<%= i.c_avg060 %>">&nbsp;<%= i.avg060 %>&nbsp;</td>
             <td style="color:<%= i.c_avg090 %>">&nbsp;<%= i.avg090 %>&nbsp;</td>
             <td style="color:<%= i.c_avg120 %>">&nbsp;<%= i.avg120 %>&nbsp;</td>
-            <td style="color:<%= i.c_030 %>">&nbsp;<%= i.min005 %> ~ <%= i.max030 %> <%= i.s_030 %>&nbsp;</td>
-            <td style="color:<%= i.c_060 %>">&nbsp;<%= i.min005 %> ~ <%= i.max060 %> <%= i.s_060 %>&nbsp;</td>
-            <td style="color:<%= i.c_090 %>">&nbsp;<%= i.min005 %> ~ <%= i.max090 %> <%= i.s_090 %>&nbsp;</td>
-            <td style="color:<%= i.c_120 %>">&nbsp;<%= i.min005 %> ~ <%= i.max120 %> <%= i.s_120 %>&nbsp;</td>
+            <td style="color:<%= i.c_030 %>">&nbsp;<%= i.min030 %> ~ <%= i.max030 %> <%= i.s_030 %>&nbsp;</td>
+            <td style="color:<%= i.c_060 %>">&nbsp;<%= i.min060 %> ~ <%= i.max060 %> <%= i.s_060 %>&nbsp;</td>
+            <td style="color:<%= i.c_090 %>">&nbsp;<%= i.min090 %> ~ <%= i.max090 %> <%= i.s_090 %>&nbsp;</td>
+            <td style="color:<%= i.c_120 %>">&nbsp;<%= i.min120 %> ~ <%= i.max120 %> <%= i.s_120 %>&nbsp;</td>
         </tr>
     <% } %>
     </tbody>
@@ -215,13 +215,13 @@ const fn_make_fund_ejs_v1 = async (data=[]) => {
             <td style="color:<%= i.c_avg150 %>"><%= i.avg150 %></td>
             <td style="color:<%= i.c_avg180 %>"><%= i.avg180 %></td>
             <td style="color:<%= i.c_avg210 %>"><%= i.avg210 %></td>
-            <td style="color:<%= i.c_030 %>"><%= i.min005 %> ~ <%= i.max030 %> <%= i.s_030 %></td>
-            <td style="color:<%= i.c_060 %>"><%= i.min005 %> ~ <%= i.max060 %> <%= i.s_060 %></td>
-            <td style="color:<%= i.c_090 %>"><%= i.min005 %> ~ <%= i.max090 %> <%= i.s_090 %></td>
-            <td style="color:<%= i.c_120 %>"><%= i.min005 %> ~ <%= i.max120 %> <%= i.s_120 %></td>
-            <td style="color:<%= i.c_150 %>"><%= i.min005 %> ~ <%= i.max150 %> <%= i.s_150 %></td>
-            <td style="color:<%= i.c_180 %>"><%= i.min005 %> ~ <%= i.max180 %> <%= i.s_180 %></td>
-            <td style="color:<%= i.c_210 %>"><%= i.min005 %> ~ <%= i.max210 %> <%= i.s_210 %></td>
+            <td style="color:<%= i.c_030 %>"><%= i.min030 %> ~ <%= i.max030 %> <%= i.s_030 %></td>
+            <td style="color:<%= i.c_060 %>"><%= i.min060 %> ~ <%= i.max060 %> <%= i.s_060 %></td>
+            <td style="color:<%= i.c_090 %>"><%= i.min090 %> ~ <%= i.max090 %> <%= i.s_090 %></td>
+            <td style="color:<%= i.c_120 %>"><%= i.min120 %> ~ <%= i.max120 %> <%= i.s_120 %></td>
+            <td style="color:<%= i.c_150 %>"><%= i.min150 %> ~ <%= i.max150 %> <%= i.s_150 %></td>
+            <td style="color:<%= i.c_180 %>"><%= i.min180 %> ~ <%= i.max180 %> <%= i.s_180 %></td>
+            <td style="color:<%= i.c_210 %>"><%= i.min210 %> ~ <%= i.max210 %> <%= i.s_210 %></td>
         </tr>
     <% } %>
     </tbody>
