@@ -26,7 +26,7 @@ async function sync_fund_net() {
         process.exit(-1);
     }
 
-    let start_date = moment().subtract(1, "day").format("YYYY-MM-DD");
+    let start_date = moment().subtract(7, "day").format("YYYY-MM-DD");
     let end_date   = moment().format("YYYY-MM-DD");
 
     // 手动指定日期
